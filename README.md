@@ -34,7 +34,7 @@ The app was built using the following technologies:
 2. **Navigate to the project directory**
 
     ```bash
-    cd weather-app
+    cd simple_weather_app_for_university
 
 3. **Install dependencies**
 

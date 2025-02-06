@@ -92,12 +92,12 @@ table td {
   padding: 12px 15px;
   text-align: center;
   border-bottom: 1px solid #7f8c8d;
-  border-right: 1px solid #7f8c8d;  /* Dodanie pionowej granicy po prawej stronie */
+  border-right: 1px solid #7f8c8d;
 }
 
 table th:last-child, 
 table td:last-child {
-  border-right: none;  /* Usunięcie prawej granicy dla ostatniej komórki w wierszu */
+  border-right: none;
 }
 
 table tr:nth-child(even) {
