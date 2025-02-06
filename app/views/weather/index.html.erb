@@ -1,2 +1,44 @@
-<h1>Weather#index</h1>
-<p>Find me in app/views/weather/index.html.erb</p>
+<div class="container">
+  <h1>Sprawdź pogodę dla wybranego miasta</h1>
+
+  <%= form_with url: weather_path, method: :get, local: true do |f| %>
+    <div>
+      <%= f.label :miasto, "Wpisz nazwę miasta:" %>
+      <%= f.text_field :miasto, value: params[:miasto], placeholder: "np. Warszawa" %>
+      <%= f.submit "Pobierz dane", class: "btn" %>
+    </div>
+  <% end %>
+
+  <% if params[:miasto].present? %>
+    <% if @dane_pogodowe.present? %>
+      <table>
+        <thead>
+          <tr>
+            <th>Stacja</th>
+            <th>Temperatura (°C)</th>
+            <th>Wiatr (m/s)</th>
+            <th>Wilgotność (%)</th>
+            <th>Ciśnienie (hPa)</th>
+            <th>Stan nieba</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @dane_pogodowe.each do |stacja| %>
+            <tr>
+              <td><%= stacja["stacja"] %></td>
+              <td><%= stacja["temperatura"] %></td>
+              <td><%= stacja["predkosc_wiatru"] %></td>
+              <td><%= stacja["wilgotnosc_wzgledna"] %></td>
+              <td><%= stacja["cisnienie"].present? ? stacja["cisnienie"] : "brak danych" %></td>
+              <td><%= weather_emoji(stacja) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p class="message">Nie znaleziono stacji odpowiadających "<strong><%= params[:miasto] %></strong>".</p>
+    <% end %>
+  <% else %>
+    <p class="message">Wpisz nazwę miasta, aby zobaczyć dane pogodowe.</p>
+  <% end %>
+</div>
